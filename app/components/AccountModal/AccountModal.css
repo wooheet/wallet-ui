@@ -1,6 +1,6 @@
 
 h3 {
-  font-size: 1.7em;
+  font-size: 1.5em;
 }
 
 .line {
@@ -36,4 +36,185 @@ h3 {
 @keyframes zoom {
   from {transform:scale(0)}
   to {transform:scale(1)}
+}
+
+.descriptive {
+  margin-top: 20px;
+  margin-left:35px;
+  margin-bottom: 10px;
+  font-size: 0.9em;
+  color: white;
+}
+
+.inputVal {
+  border: 0;
+  outline: 0;
+  margin-right:10px;
+  background-color:transparent;
+  border-bottom: 0.2px solid rgb(255,255,255);
+  width: 90%;
+  height: 40px;
+  font-size: 0.9em;
+  margin-left:30px;
+  margin-bottom:5px;
+  padding-left: 10px;
+  color:white;
+}
+
+.inputVal::placeholder {
+  color: #dfe6e9;
+  font-style: italic;
+  font-size: 0.8em;
+}
+
+.inputVal::after {
+  content: '';
+  display: block;
+  width: 0;
+  height: 2px;
+  background: #000;
+  transition: width .3s;
+}
+.inputVal:hover {
+  width: 90%;
+  border-bottom: 0.2px solid rgb(75,203,188);
+}
+
+.inputAlertName {
+  border: 0;
+  outline: 0;
+  margin-right:10px;
+  background-color:transparent;
+  border-bottom: 0.2px solid rgb(231, 14, 14);
+  width: 90%;
+  height: 40px;
+  font-size: 0.9em;
+  margin-left:30px;
+  margin-bottom:5px;
+  padding-left: 10px;
+  color:white;
+}
+.inputAlertPass {
+  border: 0;
+  outline: 0;
+  margin-right:10px;
+  background-color:transparent;
+  border-bottom: 0.2px solid rgb(231, 14, 14);
+  width: 90%;
+  height: 40px;
+  font-size: 0.9em;
+  margin-left:30px;
+  margin-bottom:5px;
+  padding-left: 10px;
+  color:white;
+}
+.inputAlertPassConfirm {
+  border: 0;
+  outline: 0;
+  margin-right:10px;
+  background-color:transparent;
+  border-bottom: 0.2px solid rgb(231, 14, 14);
+  width: 90%;
+  height: 40px;
+  font-size: 0.9em;
+  margin-left:30px;
+  margin-bottom:5px;
+  padding-left: 10px;
+  color:white;
+}
+
+.passStrength {
+  width: 91.5%;
+  height: 5px;
+  border: 0;
+  background-color: #ffffff;
+  color: #EA2027;
+  transition: all 0.1s linear;
+  text-align: left;
+  margin-left:30px;
+  margin-bottom: 30px;
+}
+
+.passwordStrengthMeter0 {
+  width: 20%;
+  height: 5px;
+  border: 0;
+  background-color:red;
+  transition: all 0.1s linear;
+  text-align: left;
+}
+.passwordStrengthMeter1 {
+  width: 40%;
+  height: 5px;
+  border: 0;
+  background-color:orange;
+  transition: all 0.1s linear;
+  text-align: left;
+}.passwordStrengthMeter2 {
+  width: 60%;
+  height: 5px;
+  border: 0;
+  background-color:yellow;
+  transition: all 0.1s linear;
+  text-align: left;
+}.passwordStrengthMeter3 {
+  width: 80%;
+  height: 5px;
+  border: 0;
+  background-color:rgb(11, 124, 230);
+  transition: all 0.1s linear;
+  text-align: left;
+}.passwordStrengthMeter4 {
+  width: 100%;
+  height: 5px;
+  border: 0;
+  background-color:green;
+  transition: all 0.1s linear;
+  text-align: left;
+}
+
+.btn {
+  border: 1px solid #fafafa;
+  outline: 0;
+  font-size: 0.8em;
+  font-weight: 500;
+  width: 15%;
+  height: 5%;
+  padding: 10px 0;
+  margin-right:15px;
+  margin-top:15px;
+  margin-bottom:15px;
+  float: right;
+  color: #fcfcfc;
+  background: transparent;
+  opacity: 1;
+  border-radius:10px;
+  box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
+  transition: all 0.1s linear;
+  cursor: pointer;
+}
+
+.btn:hover {
+  box-shadow: 0 7px 14px rgba(50, 50, 93, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08);
+  transform: translateY(-3px);
+  color: #DCB830;
+}
+
+.btn:active {
+  box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
+  transform: translateY(3px);
+}
+
+.btnGroup {
+  margin-right: 2.5%;
+}
+
+.alertInfo {
+  margin-top:20px;
+  margin-bottom: 10px;
+  text-align: center;
+  font-size: 1em;
+  font-weight: 400;
+  transition: all 0.1s linear;
+  color:#E35B5B;
 }
