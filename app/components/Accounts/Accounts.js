@@ -3,11 +3,11 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './Accounts.css';
 import routes from 'constants/routes.json';
-import AccountHeader from './AccountHeader';
-import logo from '../../resources/images/YGG_logo_main.png'
+import AccountHeader from 'components/AccountHeader';
+import logo from '../../../resources/images/YGG_logo_main.png'
 import Modal from 'react-modal';
-import back from '../../resources/images/back5.jpg'
-import AccountModal from './AccountModal'
+import back from '../../../resources/images/back5.jpg'
+import AccountModal from 'components/AccountModal'
 
 const bip38 = require('bip38'),
       HDKey = require("accounts/hdkey"),
@@ -20,9 +20,6 @@ type Props = {
   decrement: () => void,
   account: number
 };
-
-// Modal.setAppElement('#body');
-// document.getElementById('body')
 export default class Accounts extends Component<Props> {
   props: Props;
 

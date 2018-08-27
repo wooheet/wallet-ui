@@ -1,7 +1,7 @@
 import type { Dispatch as ReduxDispatch, Store as ReduxStore } from 'redux';
 
 export type counterStateType = {
-  +counter: number
+  +accounts: number
 };
 
 export type Action = {

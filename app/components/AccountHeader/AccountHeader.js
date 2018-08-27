@@ -2,14 +2,9 @@
 import React, { Component, Fragment} from 'react';
 import { Link } from 'react-router-dom';
 import styles from './AccountHeader.css';
-import headerLogo from '../../resources/images/YGG_logo.png'
+import headerLogo from '../../../resources/images/YGG_logo.png'
 
-type Props = {
-
-};
-
-export default class AccountsHeader extends Component<Props> {
-  props: Props;
+export default class AccountsHeader extends Component{
 
   render() {
     const {

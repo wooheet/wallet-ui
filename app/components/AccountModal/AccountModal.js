@@ -4,13 +4,7 @@ import { Link } from 'react-router-dom';
 import styles from './AccountModal.css';
 import Modal from 'react-modal';
 
-type Props = {
-
-};
-
-export default class AccountModal extends Component<Props> {
-  props: Props;
-
+export default class AccountModal extends Component{
   constructor(props) {
     super(props);
     this.state = {
