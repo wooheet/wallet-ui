@@ -5,7 +5,9 @@ import styles from './Accounts.css';
 import routes from 'constants/routes.json';
 import AccountHeader from './AccountHeader';
 import logo from '../../resources/images/YGG_logo_main.png'
-// import Modal from 'react-modal';
+import Modal from 'react-modal';
+import back from '../../resources/images/back5.jpg'
+import AccountModal from './AccountModal'
 
 const bip38 = require('bip38'),
       HDKey = require("accounts/hdkey"),
@@ -19,19 +21,8 @@ type Props = {
   account: number
 };
 
-// const customStyles = {
-//   content : {
-//     top                   : '50%',
-//     left                  : '50%',
-//     right                 : 'auto',
-//     bottom                : 'auto',
-//     marginRight           : '-50%',
-//     transform             : 'translate(-50%, -50%)'
-//   }
-// };
-
-// Modal.setAppElement('#body')
-
+// Modal.setAppElement('#body');
+// document.getElementById('body')
 export default class Accounts extends Component<Props> {
   props: Props;
 
@@ -39,26 +30,38 @@ export default class Accounts extends Component<Props> {
     super(props);
     this.state = {
       mnemonic:"",
+      modalStatus:"",
       modalIsOpen: false
     };
 
-    this.openModal = this.openModal.bind(this);
+    this.createModal = this.createModal.bind(this);
+    this.importModal = this.importModal.bind(this);
     this.afterOpenModal = this.afterOpenModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
+
   }
 
   componentDidMount() {
 
   }
 
-
-  openModal() {
-    this.setState({modalIsOpen: true});
+  createModal() {
+    this.setState({
+      modalIsOpen: true,
+      modalStatus:"create"
+    });
   }
-
+  importModal() {
+    this.setState({
+      modalIsOpen: true,
+      modalStatus:"import"
+    });
+  }
   afterOpenModal() {
     // references are now sync'd and can be accessed.
-    this.subtitle.style.color = '#f00';
+    this.subtitle.style.color = '#fcfcfc';
+    this.subtitle.style.marginLeft ='20px';
+    this.subtitle.style.marginTop ='10px';
   }
 
   closeModal() {
@@ -85,7 +88,7 @@ export default class Accounts extends Component<Props> {
           Accounts
           <button
               className={styles.ImportBtn}
-              onClick={increment}
+              onClick={this.importModal}
               data-tclass="ImportBtn"
               type="button"
             >
@@ -95,12 +98,18 @@ export default class Accounts extends Component<Props> {
         <div className={`account ${styles.account}`} data-tid="account">
           <button
               className={styles.createBtn}
-              onClick={this.generationMnemonic}
+              onClick={this.createModal}
               data-tclass="createBtn"
               type="button"
             >
             <i class="fa fa-plus" />
           </button>
+          <AccountModal
+            modalIsOpen={this.state.modalIsOpen}
+            closeModal={this.closeModal}
+            afterOpenModal={this.afterOpenModal}
+            status={this.state.modalStatus}
+          />
           <div className={styles.logo}>
             <img src={logo} alt="ygg" />
           </div>
@@ -109,3 +118,4 @@ export default class Accounts extends Component<Props> {
     );
   }
 }
+

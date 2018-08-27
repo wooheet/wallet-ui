@@ -35,6 +35,29 @@ const installExtensions = async () => {
   const forceDownload = !!process.env.UPGRADE_EXTENSIONS;
   const extensions = ['REACT_DEVELOPER_TOOLS', 'REDUX_DEVTOOLS'];
 
+  const windowStateKeeper = require('electron-window-state');
+  const electron = require('electron')
+
+  let { width, height } = electron.screen.getPrimaryDisplay().workAreaSize
+
+  let mainWindowState = windowStateKeeper({
+    defaultWidth: width - 100,
+    defaultHeight: height - 100
+  });
+
+  mainWindow = new BrowserWindow({
+    webPreferences: {webSecurity: false}
+    , width: mainWindowState.width
+    , height: mainWindowState.height
+    , x: mainWindowState.x
+    , y: mainWindowState.y
+    , center: true
+    , resizable: true
+    , frame: true
+    , show: false
+    , title: "Yggdrash Wallet"
+  })
+
   return Promise.all(
     extensions.map(name => installer.default(installer[name], forceDownload))
   ).catch(console.log);
@@ -59,12 +82,6 @@ app.on('ready', async () => {
   ) {
     await installExtensions();
   }
-
-  mainWindow = new BrowserWindow({
-    show: false,
-    width: 1024,
-    height: 728
-  });
 
   mainWindow.loadURL(`file://${__dirname}/app.html`);
 
