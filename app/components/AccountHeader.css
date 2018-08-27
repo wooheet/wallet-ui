@@ -1,0 +1,28 @@
+div {
+  display: block;
+  position: relative;
+}
+
+.logo {
+  display: flex;
+  height: 75px;
+  background-color: rgba(18, 38, 57, 0.35);
+  color: #fcfcfc;
+  padding: 0 40px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.0975);
+  margin-bottom: 30px;
+}
+
+.version {
+  margin-left: 5px;
+  margin-top: 30px;
+}
+
+.btnGroup img {
+  width: 200px;
+  margin-top: 10px;
+}
+
+.menu {
+  margin-left: 90%;
+}
