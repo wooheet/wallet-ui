@@ -35,6 +35,16 @@ const installExtensions = async () => {
   const forceDownload = !!process.env.UPGRADE_EXTENSIONS;
   const extensions = ['REACT_DEVELOPER_TOOLS', 'REDUX_DEVTOOLS'];
 
+  const low = require('lowdb')
+  const FileSync = require('lowdb/adapters/FileSync')
+  const adapter = new FileSync('db.json')
+  const db = low(adapter)
+
+  // Set some defaults (required if your JSON file is empty)
+  db.defaults({ accounts: [], principal:[], transaction:[], TermsOfUse:false})
+    .write();
+  global.lowdb = db;
+
   const windowStateKeeper = require('electron-window-state');
   const electron = require('electron')
 
@@ -84,6 +94,7 @@ app.on('ready', async () => {
   }
 
   mainWindow.loadURL(`file://${__dirname}/app.html`);
+  // mainWindow.loadURL("http://localhost:3000");
 
   // @TODO: Use 'ready-to-show' event
   //        https://github.com/electron/electron/blob/master/docs/api/browser-window.md#using-ready-to-show-event
