@@ -14,6 +14,16 @@ import { app, BrowserWindow } from 'electron';
 import MenuBuilder from './menu';
 
 let mainWindow = null;
+const low = require('lowdb')
+const FileAsync = require('lowdb/adapters/FileAsync')
+const adapter = new FileAsync('db.json');
+const db = low(adapter)
+
+low(adapter)
+.then((db) => {
+  db.defaults({ accounts: [], principal:[], transaction:[], TermsOfUse:false }).write();
+  return global.lowdb = db;
+})
 
 if (process.env.NODE_ENV === 'production') {
   const sourceMapSupport = require('source-map-support');
@@ -30,24 +40,9 @@ if (
   require('module').globalPaths.push(p);
 }
 
-const installExtensions = async () => {
-  const installer = require('electron-devtools-installer');
-  const forceDownload = !!process.env.UPGRADE_EXTENSIONS;
-  const extensions = ['REACT_DEVELOPER_TOOLS', 'REDUX_DEVTOOLS'];
-
-  const low = require('lowdb')
-  const FileSync = require('lowdb/adapters/FileSync')
-  const adapter = new FileSync('db.json')
-  const db = low(adapter)
-
-  // Set some defaults (required if your JSON file is empty)
-  db.defaults({ accounts: [], principal:[], transaction:[], TermsOfUse:false})
-    .write();
-  global.lowdb = db;
-
+const size = () => {
   const windowStateKeeper = require('electron-window-state');
-  const electron = require('electron')
-
+  const electron = require('electron');
   let { width, height } = electron.screen.getPrimaryDisplay().workAreaSize
 
   let mainWindowState = windowStateKeeper({
@@ -55,18 +50,18 @@ const installExtensions = async () => {
     defaultHeight: height - 100
   });
 
-  mainWindow = new BrowserWindow({
-    webPreferences: {webSecurity: false}
-    , width: mainWindowState.width
-    , height: mainWindowState.height
-    , x: mainWindowState.x
-    , y: mainWindowState.y
-    , center: true
-    , resizable: true
-    , frame: true
-    , show: false
-    , title: "Yggdrash Wallet"
-  })
+  return mainWindowState
+}
+
+if (process.env.NODE_ENV === 'production') {
+  const sourceMapSupport = require('source-map-support');
+  sourceMapSupport.install();
+}
+
+const installExtensions = async () => {
+  const installer = require('electron-devtools-installer');
+  const forceDownload = !!process.env.UPGRADE_EXTENSIONS;
+  const extensions = ['REACT_DEVELOPER_TOOLS', 'REDUX_DEVTOOLS'];
 
   return Promise.all(
     extensions.map(name => installer.default(installer[name], forceDownload))
@@ -92,6 +87,21 @@ app.on('ready', async () => {
   ) {
     await installExtensions();
   }
+
+  let mainWindowState = size();
+
+  mainWindow = new BrowserWindow({
+    webPreferences: {webSecurity: false}
+    , width: mainWindowState.width
+    , height: mainWindowState.height
+    , x: mainWindowState.x
+    , y: mainWindowState.y
+    , center: true
+    , resizable: true
+    , frame: true
+    , show: false
+    , title: "Yggdrash Wallet"
+  })
 
   mainWindow.loadURL(`file://${__dirname}/app.html`);
   // mainWindow.loadURL("http://localhost:3000");

@@ -1,8 +1,8 @@
 directories:
   output: release
   buildResources: resources
-productName: ElectronReact
-appId: org.develar.ElectronReact
+productName: YggdrashWallet
+appId: io.YggdrashWallet
 files:
   - dist/
   - node_modules/
